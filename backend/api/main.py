@@ -13,7 +13,6 @@ import os
 import jwt
 import time
 from transformers import AutoTokenizer, AutoModelForCausalLM
-import torch
 
 # Load environment variables
 load_dotenv()

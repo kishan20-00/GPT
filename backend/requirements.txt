@@ -6,5 +6,4 @@ python-dotenv
 redis
 jwt
 transformers
-torch
 httpx

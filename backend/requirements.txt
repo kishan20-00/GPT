@@ -4,3 +4,12 @@ authlib
 pydantic
 python-dotenv
 redis
+dotenv
+datetime
+urllib
+os
+jwt
+time
+transformers
+torch
+httpx

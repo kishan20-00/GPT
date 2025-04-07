@@ -4,10 +4,8 @@ authlib
 pydantic
 python-dotenv
 redis
-random
 string
 starlette
-dotenv
 datetime
 urllib
 os

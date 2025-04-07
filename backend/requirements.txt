@@ -3,3 +3,4 @@ uvicorn
 authlib
 pydantic
 python-dotenv
+redis

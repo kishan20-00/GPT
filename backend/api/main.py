@@ -25,7 +25,9 @@ app = FastAPI()
 # CORS settings
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=["http://localhost:5173",
+                   "https://gpt-2ait.vercel.app",  # Your production frontend
+        "https://gpt-seven-sand.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

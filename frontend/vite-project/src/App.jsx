@@ -13,7 +13,8 @@ function App() {
     try {
       const res = await fetch("https://gpt-seven-sand.vercel.app/request-magic-link", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",
+          'Accept': 'application/json' },
         body: JSON.stringify({ email }),
       });
 
@@ -29,11 +30,11 @@ function App() {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = "http://localhost:8000/login/google";
+    window.location.href = "https://gpt-seven-sand.vercel.app/login/google";
   };
 
   const handleGithubLogin = () => {
-    window.location.href = "http://localhost:8000/login/github";
+    window.location.href = "https://gpt-seven-sand.vercel.app/login/github";
   };
 
   return (

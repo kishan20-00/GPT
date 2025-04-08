@@ -13,6 +13,7 @@ function App() {
     try {
       const res = await fetch("https://gpt-seven-sand.vercel.app/request-magic-link", {
         method: "POST",
+        credentials: 'include', 
         headers: { "Content-Type": "application/json",
           'Accept': 'application/json' },
         body: JSON.stringify({ email }),

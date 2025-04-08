@@ -7,4 +7,3 @@ itsdangerous
 httpx
 redis
 jwt
-flask-cors

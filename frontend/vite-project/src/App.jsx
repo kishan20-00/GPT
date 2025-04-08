@@ -11,7 +11,7 @@ function App() {
     if (!email) return;
 
     try {
-      const res = await fetch("http://localhost:8000/request-magic-link", {
+      const res = await fetch("https://gpt-seven-sand.vercel.app/request-magic-link", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),

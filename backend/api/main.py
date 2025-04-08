@@ -16,13 +16,11 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from authlib.integrations.starlette_client import OAuthError
-from flask_cors import CORS
 
 # Load environment variables
 load_dotenv()
 
 app = FastAPI()
-CORS(app)
 
 # CORS settings
 app.add_middleware(

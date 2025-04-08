@@ -26,15 +26,22 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173",
-                   "https://gpt-2ait.vercel.app",  # Your production frontend
-        "https://gpt-seven-sand.vercel.app"],
+                   "https://gpt-2ait.vercel.app",
+                   "https://gpt-seven-sand.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"]
 )
 
-# Session middleware
-app.add_middleware(SessionMiddleware, secret_key=os.getenv("SESSION_SECRET_KEY", "supersecret"))
+app.add_middleware(
+    SessionMiddleware,
+    secret_key=os.getenv("SESSION_SECRET_KEY"),
+    session_cookie="session_cookie",
+    same_site="none",  # Required for cross-origin cookies
+    https_only=True,  # Required for secure cookies
+    max_age=3600  # 1 hour
+)
 
 # OAuth
 oauth = OAuth()

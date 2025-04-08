@@ -29,7 +29,11 @@ function App() {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = "http://localhost:8000/login";
+    window.location.href = "http://localhost:8000//login/google";
+  };
+
+  const handleGithubLogin = () => {
+    window.location.href = "http://localhost:8000/login/github";
   };
 
   return (
@@ -55,7 +59,7 @@ function App() {
           {msg && <p style={{ marginTop: "1rem", color: msg.includes("✅") ? "green" : "red" }}>{msg}</p>}
 
           <div className="divider">OR CONTINUE WITH</div>
-          <button className="oauth github">Login with GitHub</button>
+          <button className="oauth github" onClick={handleGithubLogin}>Login with GitHub</button>
           <button className="oauth google" onClick={handleGoogleLogin}>
             Login with Google
           </button>

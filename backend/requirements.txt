@@ -3,8 +3,5 @@ uvicorn
 authlib
 pydantic
 python-dotenv
-redis
-jwt
-transformers
-httpx
 itsdangerous
+httpx

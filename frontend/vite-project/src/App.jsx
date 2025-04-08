@@ -29,7 +29,7 @@ function App() {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = "http://localhost:8000//login/google";
+    window.location.href = "http://localhost:8000/login/google";
   };
 
   const handleGithubLogin = () => {

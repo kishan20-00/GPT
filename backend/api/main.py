@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 from datetime import datetime, timedelta
 from urllib.parse import urlencode
 import os
-import jwt
+from jose import jwt
 import time
 import smtplib
 from email.mime.text import MIMEText

@@ -300,7 +300,7 @@ async def auth_github(request: Request):
         if not primary_email:
             raise HTTPException(status_code=400, detail="No primary email found")
         
-        frontend_url = os.getenv("FRONTEND_URL", "http://localhost:5173/success")
+        frontend_url = "http://localhost:5173/success"
         params = urlencode({
             "name": user_data.get("name") or user_data.get("login"),
             "email": primary_email,

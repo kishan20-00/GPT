@@ -51,7 +51,10 @@ oauth.register(
     client_id=os.getenv('GOOGLE_CLIENT_ID'),
     client_secret=os.getenv('GOOGLE_CLIENT_SECRET'),
     server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
-    client_kwargs={'scope': 'openid email profile'}
+    client_kwargs={
+        'scope': 'openid email profile',
+        'redirect_uri': os.getenv('GOOGLE_REDIRECT_URI')  # Add this line
+    }
 )
 
 # Add GitHub OAuth registration
@@ -62,7 +65,10 @@ oauth.register(
     access_token_url='https://github.com/login/oauth/access_token',
     authorize_url='https://github.com/login/oauth/authorize',
     api_base_url='https://api.github.com/',
-    client_kwargs={'scope': 'user:email'},
+    client_kwargs={
+        'scope': 'user:email',
+        'redirect_uri': os.getenv('GITHUB_REDIRECT_URI')  # Add this
+    },
 )
 
 # Redis setup
@@ -144,18 +150,19 @@ async def auth(request: Request):
     token = await oauth.google.authorize_access_token(request)
     try:
         user = await oauth.google.parse_id_token(request, token)
-    except Exception:
-        user = None
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Authentication failed: {str(e)}")
+    
     if not user:
-        resp = await oauth.google.get("https://www.googleapis.com/oauth2/v3/userinfo", token=token)
-        user = resp.json()
-    frontend_url = "http://localhost:5173/success"
+        raise HTTPException(status_code=400, detail="Failed to fetch user info")
+    
+    frontend_url = os.getenv("FRONTEND_URL", "http://localhost:5173")
     params = urlencode({
         "name": user.get("name"),
         "email": user.get("email"),
         "picture": user.get("picture")
     })
-    return RedirectResponse(f"{frontend_url}?{params}")
+    return RedirectResponse(f"{frontend_url}/success?{params}")
 
 @app.post("/request-magic-link")
 async def request_magic_link(payload: dict = Body(...)):
@@ -293,7 +300,7 @@ async def auth_github(request: Request):
         if not primary_email:
             raise HTTPException(status_code=400, detail="No primary email found")
         
-        frontend_url = "http://localhost:5173/success"
+        frontend_url = os.getenv("FRONTEND_URL", "http://localhost:5173/success")
         params = urlencode({
             "name": user_data.get("name") or user_data.get("login"),
             "email": primary_email,

@@ -156,7 +156,7 @@ async def auth(request: Request):
     if not user:
         raise HTTPException(status_code=400, detail="Failed to fetch user info")
     
-    frontend_url = os.getenv("FRONTEND_URL", "http://localhost:5173")
+    frontend_url = os.getenv("FRONTEND_URL", "https://gpt-2ait.vercel.app")
     params = urlencode({
         "name": user.get("name"),
         "email": user.get("email"),
@@ -177,7 +177,7 @@ async def request_magic_link(payload: dict = Body(...)):
         os.getenv("JWT_SECRET_KEY"),
         algorithm="HS256"
     )
-    magic_link = f"http://localhost:5173/verify?token={token}"
+    magic_link = f"https://gpt-2ait.vercel.app/verify?token={token}"
 
     # Send email
     try:
@@ -300,7 +300,7 @@ async def auth_github(request: Request):
         if not primary_email:
             raise HTTPException(status_code=400, detail="No primary email found")
         
-        frontend_url = os.getenv("FRONTEND_URL", "http://localhost:5173/success")
+        frontend_url = os.getenv("FRONTEND_URL", "https://gpt-2ait.vercel.app/success")
         params = urlencode({
             "name": user_data.get("name") or user_data.get("login"),
             "email": primary_email,

@@ -65,7 +65,10 @@ oauth.register(
     access_token_url='https://github.com/login/oauth/access_token',
     authorize_url='https://github.com/login/oauth/authorize',
     api_base_url='https://api.github.com/',
-    client_kwargs={'scope': 'user:email'},
+    client_kwargs={
+        'scope': 'user:email',
+        'redirect_uri': os.getenv('GITHUB_REDIRECT_URI')  # Add this
+    },
 )
 
 # Redis setup
@@ -297,7 +300,7 @@ async def auth_github(request: Request):
         if not primary_email:
             raise HTTPException(status_code=400, detail="No primary email found")
         
-        frontend_url = "http://localhost:5173/success"
+        frontend_url = os.getenv("FRONTEND_URL", "http://localhost:5173/success")
         params = urlencode({
             "name": user_data.get("name") or user_data.get("login"),
             "email": primary_email,

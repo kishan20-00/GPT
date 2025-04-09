@@ -26,7 +26,7 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173",
-                   "https://gpt-2ait.vercel.app",
+                   "https://gpt-ten-pi-48.vercel.app",
                    "https://gpt-seven-sand.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],

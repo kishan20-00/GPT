@@ -11,7 +11,7 @@ function Verify() {
   useEffect(() => {
     const verifyToken = async () => {
       try {
-        const res = await fetch(`http://localhost:8000/verify-magic-link?token=${token}`);
+        const res = await fetch(`https://gpt-seven-sand.vercel.app/verify-magic-link?token=${token}`);
         const data = await res.json();
 
         if (data.email) {
